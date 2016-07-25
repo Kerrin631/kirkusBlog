@@ -117,9 +117,3 @@ def update_post_save(request, slug):
 		'categories': Category.objects.all(),
         'posts': Blog.objects.all()
 		})
-
-	# print(request.title)
-	# blog = Blog.objects.get(slug=slug) 
-	# print(len(blog.body), 'LENGTH')
-	# if len(blog.title) > 0
-	pass
