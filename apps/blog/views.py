@@ -75,6 +75,3 @@ def addPost(request):
 		'form': postForm()
 	})
 
-def delete_post(request):
-	print(request)
-	pass
