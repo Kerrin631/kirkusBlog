@@ -19,6 +19,18 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return ('view_blog_post', None, { 'slug': self.slug })
 
+    @permalink
+    def get_absolute_url_for_update(self):
+        return ('nav_to_update_blog_post', None, { 'slug': self.slug })
+
+    @permalink
+    def get_absolute_url_for_update_save(self):
+        return ('update_blog_post', None, { 'slug': self.slug })
+
+    @permalink
+    def get_absolute_url_for_delete(self):
+        return ('delete_blog_post', None, { 'slug': self.slug })
+
 class Category(models.Model):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True)
@@ -29,4 +41,8 @@ class Category(models.Model):
     @permalink
     def get_absolute_url(self):
         return ('view_blog_category', None, { 'slug': self.slug })
+
+    @permalink
+    def get_absolute_url_for_delete(self):
+        return ('delete_category', None, { 'slug': self.slug })
         

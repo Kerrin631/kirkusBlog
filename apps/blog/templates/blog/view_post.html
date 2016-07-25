@@ -9,5 +9,11 @@
     {{ post.body }}
 
     <br><br>
+    <a href="{{ post.get_absolute_url_for_update }}">Update Blog Post</a>
+
+    <br><br>
+    <a href="{{ post.get_absolute_url_for_delete }}">Delete</a>
+
+    <br><br>
         <a href="{% url 'index' %}">Home</a>
 {% endblock %}

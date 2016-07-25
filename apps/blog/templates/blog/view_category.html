@@ -11,7 +11,7 @@
         </ul>
     {% else %}
         <p>There are no posts.</p>
-        <a href="">Delete Category</a>
+        <a href="{{ category.get_absolute_url_for_delete }}">Delete Category</a>
     {% endif %}
 
 

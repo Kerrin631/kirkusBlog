@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %} 
+{% block head_title %}Create Post
+{% endblock %}
+{% block title %}Update Post{% endblock %}
+
+{% block content %}
+
+
+	<form action="{{ post.get_absolute_url_for_update_save }}" method="post">
+	<p>Title: {{ post.title }}</p>
+	{{ form.title }}<br>
+
+	<p>Body: {{ post.body}}</p>
+	{{ form.body}}<br>
+
+	<p>Category: {{ post.category }}</p>
+	{{ form.category }}<br>
+
+    	<input type="submit" value="submit" />
+	</form>
+
+
+    <br><br>
+        <a href="{% url 'index' %}">Home</a>
+{% endblock %}

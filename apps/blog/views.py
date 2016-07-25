@@ -41,7 +41,7 @@ def addCategory(request):
 			slug = request.POST.get("title", "")
 			cat_obj = Category(title = title, slug = slug)
 			cat_obj.save()
-			return HttpResponseRedirect(reverse('create_new_category'))
+			return HttpResponseRedirect(reverse('index'))
 	else:
 		messages.error(request, "Error")
 	return render(request, 'blog/create_category.html', {
@@ -66,12 +66,60 @@ def addPost(request):
 				category = Category.objects.get(id = request.POST.get("category"))
 				post_obj = Blog(title = title, slug = slug, body = body, posted = posted, category = category)
 				post_obj.save()
-				return HttpResponseRedirect(reverse('create_new_post'))
+				return HttpResponseRedirect(reverse('index'))
 		else:
 			return HttpResponse('Please make sure all fields are populated')
 	else:
 		messages.error(request, "Error")
-	return render(request, 'blog/create_post.html', {
-		'form': postForm()
+	return redirect(request, 'index', {
 	})
 
+def delete_post(request, slug):
+	Blog.objects.filter(slug=slug).delete()
+	return render(request, 'blog/index.html', {
+		'categories': Category.objects.all(),
+        'posts': Blog.objects.all()
+	})
+
+def delete_category(request, slug):
+	Category.objects.filter(slug=slug).delete()
+	return render(request, 'blog/index.html', {
+		'categories': Category.objects.all(),
+        'posts': Blog.objects.all()
+	})
+
+def update_post(request, slug):
+	form = postForm()
+	return render_to_response('blog/update_post.html', {
+		'post': get_object_or_404(Blog, slug=slug),
+		'form': form,
+	})
+
+def update_post_save(request, slug):
+	blog = Blog.objects.get(slug=slug) 
+	if request.method == 'POST':
+
+		form = postForm(request.POST)
+		if form.is_valid():
+			print('FORM IS VALID FORM IS VALID')
+			title = request.POST.get("title", "")
+			slug = request.POST.get("title", "")
+			body = request.POST.get("body", "")
+			posted = datetime.now()
+			category = Category.objects.get(id = request.POST.get("category"))
+			Blog.objects.filter(pk = blog.id).update(title = title, slug = slug, body = body, posted = posted, category = category)
+			return HttpResponseRedirect(reverse('index'))
+		else:
+			return HttpResponse('Please make sure all fields are populated')
+	else:
+		messages.error(request, "Error")
+	return render(request, 'blog/index.html', {
+		'categories': Category.objects.all(),
+        'posts': Blog.objects.all()
+		})
+
+	# print(request.title)
+	# blog = Blog.objects.get(slug=slug) 
+	# print(len(blog.body), 'LENGTH')
+	# if len(blog.title) > 0
+	pass
