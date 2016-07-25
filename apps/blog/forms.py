@@ -4,10 +4,6 @@ from models import Blog, Category
 class categoryForm(forms.Form):
 	"""docstring for categoryForm"""
 	title = forms.CharField(label='Category', max_length=100)
-	# slug = forms.SlugField()
-
-# class ContactForm(forms.Form):
-#   full_name = forms.CharField(label='Your full name', max_length=100)
 		
 class postForm(forms.Form):
 	
