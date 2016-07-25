@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %} 
+{% block head_title %}Create Category{% endblock %}
+{% block title %}Create New Category{% endblock %}
+
+{% block content %}
+
+
+	<form action="{% url 'addCategory' %}" method="post">
+	
+		{{ form }}
+    	<input type="submit" value="submit" />
+	</form>
+
+
+    <br><br>
+        <a href="{% url 'index' %}">Home</a>
+{% endblock %}
+

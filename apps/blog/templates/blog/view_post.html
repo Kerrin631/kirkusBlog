@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %} 
+{% block head_title %}{{ post.title }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+	<p><b>Posted:</b> {{ post.posted }}</p>
+
+    {{ post.body }}
+
+    <br><br>
+        <a href="{% url 'index' %}">Home</a>
+{% endblock %}
